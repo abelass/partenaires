@@ -9,7 +9,7 @@
 	schema="1.0.0" 
 >
 	<!--
-		Paquet genere le 2014-01-02 10:14:24
+		Paquet genere le 2014-01-02 10:26:58
 		(Vous pouvez bien entendu supprimer ces commentaires) 
 	-->
 
@@ -46,6 +46,9 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/partenaires.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/partenaires.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/partenaires.php" /> 
+	<pipeline nom="affiche_milieu" inclure="partenaires_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="partenaires_pipelines.php" /> 
 
 	<menu nom="partenaires" titre="partenaire:titre_partenaires" parent="menu_edition" icone="images/partenaire-16.png" action="partenaires" /> 
 	<menu nom="partenaire_creer" titre="partenaire:icone_creer_partenaire" parent="outils_rapides" icone="images/partenaire-new-16.png" action="partenaire_edit" parametres="new=oui" /> 

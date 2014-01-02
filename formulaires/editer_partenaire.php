@@ -21,6 +21,9 @@ include_spip('inc/editer');
  *     Identifiant du partenaire. 'new' pour un nouveau partenaire.
  * @param string $retour
  *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le partenaire créé à cet objet,
+ *     tel que `article|3`
  * @param int $lier_trad
  *     Identifiant éventuel d'un partenaire source d'une traduction
  * @param string $config_fonc
@@ -32,8 +35,8 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_partenaire_identifier_dist($id_partenaire='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return serialize(array(intval($id_partenaire)));
+function formulaires_editer_partenaire_identifier_dist($id_partenaire='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	return serialize(array(intval($id_partenaire), $associer_objet));
 }
 
 /**
@@ -47,6 +50,9 @@ function formulaires_editer_partenaire_identifier_dist($id_partenaire='new', $re
  *     Identifiant du partenaire. 'new' pour un nouveau partenaire.
  * @param string $retour
  *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le partenaire créé à cet objet,
+ *     tel que `article|3`
  * @param int $lier_trad
  *     Identifiant éventuel d'un partenaire source d'une traduction
  * @param string $config_fonc
@@ -58,7 +64,7 @@ function formulaires_editer_partenaire_identifier_dist($id_partenaire='new', $re
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_partenaire_charger_dist($id_partenaire='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_partenaire_charger_dist($id_partenaire='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('partenaire',$id_partenaire,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	return $valeurs;
 }
@@ -74,6 +80,9 @@ function formulaires_editer_partenaire_charger_dist($id_partenaire='new', $retou
  *     Identifiant du partenaire. 'new' pour un nouveau partenaire.
  * @param string $retour
  *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le partenaire créé à cet objet,
+ *     tel que `article|3`
  * @param int $lier_trad
  *     Identifiant éventuel d'un partenaire source d'une traduction
  * @param string $config_fonc
@@ -85,7 +94,7 @@ function formulaires_editer_partenaire_charger_dist($id_partenaire='new', $retou
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_partenaire_verifier_dist($id_partenaire='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_partenaire_verifier_dist($id_partenaire='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 
 	return formulaires_editer_objet_verifier('partenaire',$id_partenaire, array('nom'));
 
@@ -102,6 +111,9 @@ function formulaires_editer_partenaire_verifier_dist($id_partenaire='new', $reto
  *     Identifiant du partenaire. 'new' pour un nouveau partenaire.
  * @param string $retour
  *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le partenaire créé à cet objet,
+ *     tel que `article|3`
  * @param int $lier_trad
  *     Identifiant éventuel d'un partenaire source d'une traduction
  * @param string $config_fonc
@@ -113,8 +125,23 @@ function formulaires_editer_partenaire_verifier_dist($id_partenaire='new', $reto
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_partenaire_traiter_dist($id_partenaire='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_traiter('partenaire',$id_partenaire,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+function formulaires_editer_partenaire_traiter_dist($id_partenaire='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	$res = formulaires_editer_objet_traiter('partenaire',$id_partenaire,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+ 
+	// Un lien a prendre en compte ?
+	if ($associer_objet AND $id_partenaire = $res['id_partenaire']) {
+		list($objet, $id_objet) = explode('|', $associer_objet);
+
+		if ($objet AND $id_objet AND autoriser('modifier', $objet, $id_objet)) {
+			include_spip('action/editer_liens');
+			objet_associer(array('partenaire' => $id_partenaire), array($objet => $id_objet));
+			if (isset($res['redirect'])) {
+				$res['redirect'] = parametre_url ($res['redirect'], "id_lien_ajoute", $id_partenaire, '&');
+			}
+		}
+	}
+	return $res;
+
 }
 
 

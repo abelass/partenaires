@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_partenaires_selectionnes>
+	<ul>
+	<BOUCLE_partenaires_selectionnes(PARTENAIRES){id_partenaire IN #GET*{valeur}}
+		{par num nom, nom}{statut?}{tout}>
+		<li class="choix">#NOM (#ID_PARTENAIRE)</li>
+	</BOUCLE_partenaires_selectionnes>
+	</ul>
+	</B_partenaires_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_partenaires_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_partenaire_selectionne(PARTENAIRES){id_partenaire=#ENV{valeur}}
+		{par num nom, nom}{statut?}{tout}>
+	  	<p>#NOM (#ID_PARTENAIRE)</p>
+	</BOUCLE_partenaire_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_partenaire_selectionne>
+<//B_test_multiple>
