@@ -2,11 +2,11 @@
 /**
  * Préchargement des formulaires d'édition de partenaire
  *
- * @plugin     Partenaires
+ * @plugin     Partenaires Objets
  * @copyright  2014
  * @author     Rainer
  * @licence    GNU/GPL
- * @package    SPIP\Partenaires\Formulaires
+ * @package    SPIP\Partenaires_objets\Formulaires
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

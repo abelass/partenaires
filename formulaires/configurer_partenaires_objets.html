@@ -1,6 +1,6 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
-	<h3 class="titrem"><:partenaires:cfg_titre_parametrages:></h3>
+	<h3 class="titrem"><:partenaires_objets:cfg_titre_parametrages:></h3>
 
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -11,11 +11,11 @@
 
 		<ul>
 			[(#SAISIE{input, exemple,
-				label=<:partenaires:cfg_exemple:>,
-				explication=<:partenaires:cfg_exemple_explication:>})]
+				label=<:partenaires_objets:cfg_exemple:>,
+				explication=<:partenaires_objets:cfg_exemple_explication:>})]
 		</ul>
 
-		<input type="hidden" name="_meta_casier" value="partenaires" />
+		<input type="hidden" name="_meta_casier" value="partenaires_objets" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>

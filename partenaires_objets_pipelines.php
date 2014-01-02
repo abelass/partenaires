@@ -1,12 +1,12 @@
 <?php
 /**
- * Utilisations de pipelines par Partenaires
+ * Utilisations de pipelines par Partenaires Objets
  *
- * @plugin     Partenaires
+ * @plugin     Partenaires Objets
  * @copyright  2014
  * @author     Rainer
  * @licence    GNU/GPL
- * @package    SPIP\Partenaires\Pipelines
+ * @package    SPIP\Partenaires_objets\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -28,7 +28,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
-function partenaires_affiche_milieu($flux) {
+function partenaires_objets_affiche_milieu($flux) {
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
 
@@ -50,22 +50,6 @@ function partenaires_affiche_milieu($flux) {
 			$flux['data'] .= $texte;
 	}
 
-	return $flux;
-}
-
-
-
-/**
- * Optimiser la base de données en supprimant les liens orphelins
- * de l'objet vers quelqu'un et de quelqu'un vers l'objet.
- *
- * @pipeline optimiser_base_disparus
- * @param  array $flux Données du pipeline
- * @return array       Données du pipeline
- */
-function partenaires_optimiser_base_disparus($flux){
-	include_spip('action/editer_liens');
-	$flux['data'] += objet_optimiser_liens(array('partenaire'=>'*'),'*');
 	return $flux;
 }
 

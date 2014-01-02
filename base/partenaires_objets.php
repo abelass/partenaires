@@ -2,11 +2,11 @@
 /**
  * Déclarations relatives à la base de données
  *
- * @plugin     Partenaires
+ * @plugin     Partenaires Objets
  * @copyright  2014
  * @author     Rainer
  * @licence    GNU/GPL
- * @package    SPIP\Partenaires\Pipelines
+ * @package    SPIP\Partenaires_objets\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  *     Déclarations d'interface pour le compilateur
  */
-function partenaires_declarer_tables_interfaces($interfaces) {
+function partenaires_objets_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['partenaires'] = 'partenaires';
 
@@ -38,7 +38,7 @@ function partenaires_declarer_tables_interfaces($interfaces) {
  * @return array
  *     Description complétée des tables
  */
-function partenaires_declarer_tables_objets_sql($tables) {
+function partenaires_objets_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_partenaires'] = array(
 		'type' => 'partenaire',
@@ -101,7 +101,7 @@ function partenaires_declarer_tables_objets_sql($tables) {
  * @return array
  *     Description complétée des tables
  */
-function partenaires_declarer_tables_auxiliaires($tables) {
+function partenaires_objets_declarer_tables_auxiliaires($tables) {
 
 	$tables['spip_partenaires_liens'] = array(
 		'field' => array(

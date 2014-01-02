@@ -1,12 +1,12 @@
 <?php
 /**
- * Définit les autorisations du plugin Partenaires
+ * Définit les autorisations du plugin Partenaires Objets
  *
- * @plugin     Partenaires
+ * @plugin     Partenaires Objets
  * @copyright  2014
  * @author     Rainer
  * @licence    GNU/GPL
- * @package    SPIP\Partenaires\Autorisations
+ * @package    SPIP\Partenaires_objets\Autorisations
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -20,13 +20,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function partenaires_autoriser(){}
+function partenaires_objets_autoriser(){}
 
 
 /* Exemple
-function autoriser_configurer_partenaires_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_configurer_partenaires_objets_dist($faire, $type, $id, $qui, $opt) {
 	// type est un objet (la plupart du temps) ou une chose.
-	// autoriser('configurer', '_partenaires') => $type = 'partenaires'
+	// autoriser('configurer', '_partenaires_objets') => $type = 'partenaires_objets'
 	// au choix
 	return autoriser('webmestre', $type, $id, $qui, $opt); // seulement les webmestres
 	return autoriser('configurer', '', $id, $qui, $opt); // seulement les administrateurs complets
