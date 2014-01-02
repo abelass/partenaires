@@ -1,3 +1,7 @@
+#SET{objets,#ARRAY}
+<BOUCLE_defaut(DATA){source tableau, #GET{selected}}{si #GET{devise_default}|non}{0,1}>
+        #SET{devise_default,#VALEUR}
+</BOUCLE_defaut>
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
 	<h3 class="titrem"><:partenaires_objets:cfg_titre_parametrages:></h3>
@@ -10,9 +14,10 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<ul>
-			[(#SAISIE{input, exemple,
-				label=<:partenaires_objets:cfg_exemple:>,
-				explication=<:partenaires_objets:cfg_exemple_explication:>})]
+			[(#SAISIE{checkbox,objets_prix,
+                    datas=#GET{objets},
+                    label=<:prix_objets:label_selection_objet_prix:>}
+                    )]
 		</ul>
 
 		<input type="hidden" name="_meta_casier" value="partenaires_objets" />
