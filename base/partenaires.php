@@ -40,7 +40,7 @@ function partenaires_declarer_tables_interfaces($interfaces) {
  */
 function partenaires_declarer_tables_objets_sql($tables) {
 
-	$tables['partenaires'] = array(
+	$tables['spip_partenaires'] = array(
 		'type' => 'partenaire',
 		'principale' => "oui",
 		'field'=> array(
@@ -65,7 +65,7 @@ function partenaires_declarer_tables_objets_sql($tables) {
 		'champs_editables'  => array('nom', 'descriptif'),
 		'champs_versionnes' => array('nom', 'descriptif'),
 		'rechercher_champs' => array("nom" => 8, "descriptif" => 6),
-		'tables_jointures'  => array('partenaires_liens'),
+		'tables_jointures'  => array('spip_partenaires_liens'),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
 			'prop'     => 'texte_statut_propose_evaluation',
@@ -102,7 +102,7 @@ function partenaires_declarer_tables_objets_sql($tables) {
  */
 function partenaires_declarer_tables_auxiliaires($tables) {
 
-	$tables['partenaires_liens'] = array(
+	$tables['spip_partenaires_liens'] = array(
 		'field' => array(
 			"id_partenaire"      => "bigint(21) DEFAULT '0' NOT NULL",
 			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
