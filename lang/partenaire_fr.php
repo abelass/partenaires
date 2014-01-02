@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_descriptif' => 'Descriptif',
 	'label_nom' => 'Nom',
+	'label_url_partenaire' => 'L’adresse (URL) du site du partenaire',
 
 	// R
 	'retirer_lien_partenaire' => 'Retirer ce partenaire',

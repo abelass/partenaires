@@ -47,6 +47,7 @@ function partenaires_declarer_tables_objets_sql($tables) {
 			"id_partenaire"      => "bigint(21) NOT NULL",
 			"nom"                => "text NOT NULL DEFAULT ''",
 			"descriptif"         => "text NOT NULL DEFAULT ''",
+			"url_partenaire"     => "varchar(250) NOT NULL DEFAULT ''",
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
 			"lang"               => "VARCHAR(10) NOT NULL DEFAULT ''",
@@ -62,8 +63,8 @@ function partenaires_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "nom AS titre, lang AS lang",
 		'date' => "date",
-		'champs_editables'  => array('nom', 'descriptif'),
-		'champs_versionnes' => array('nom', 'descriptif'),
+		'champs_editables'  => array('nom', 'descriptif', 'url_partenaire'),
+		'champs_versionnes' => array('nom', 'descriptif', 'url_partenaire'),
 		'rechercher_champs' => array("nom" => 8, "descriptif" => 6),
 		'tables_jointures'  => array('spip_partenaires_liens'),
 		'statut_textes_instituer' => array(
