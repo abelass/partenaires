@@ -1,7 +1,9 @@
 #SET{objets,#ARRAY}
-<BOUCLE_defaut(DATA){source tableau, #GET{selected}}{si #GET{devise_default}|non}{0,1}>
-        #SET{devise_default,#VALEUR}
-</BOUCLE_defaut>
+<BOUCLE_objets_liste(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
+    [(#VALEUR{page}|is_string|oui)
+        [(#SET{objets,#GET{objets}|array_merge{#ARRAY{#VALEUR{page},#VALEUR{texte_objets}|_T}}})]
+    ]
+</BOUCLE_objets_liste>
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
 	<h3 class="titrem"><:partenaires_objets:cfg_titre_parametrages:></h3>
@@ -14,9 +16,9 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<ul>
-			[(#SAISIE{checkbox,objets_prix,
+			[(#SAISIE{checkbox,objets,
                     datas=#GET{objets},
-                    label=<:prix_objets:label_selection_objet_prix:>}
+                    label=<:partenaires_objets:label_selection_partenaires_objets:>}
                     )]
 		</ul>
 

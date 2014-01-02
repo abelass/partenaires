@@ -49,7 +49,10 @@ function partenaires_objets_upgrade($nom_meta_base_version, $version_cible) {
 	# );
 	# ...
 
-	$maj['create'] = array(array('maj_tables', array('spip_partenaires_liens')));
+	$maj['create'] = array(
+		array('maj_tables', array('spip_partenaires_liens')),
+		array('ecrire_config', 'partenaires_objets', array('objets' => array('article')))
+		);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

@@ -13,8 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
 	
-	//L
-	'label_selection_objets_partenaires'=>'Activer la possibilité de lier les Partenaires aux objets suivants',
+	'label_selection_partenaires_objets'=>'Sélectionnez les objets auxquelles les partenaires peuvent être associés.',
 
 	// T
 	'titre_page_configurer_partenaires_objets' => 'Paramêtres Plugin Partenaires Objets',

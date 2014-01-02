@@ -29,13 +29,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array       Données du pipeline
  */
 function partenaires_objets_affiche_milieu($flux) {
+	include_spip('inc/config');
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
-
+	$config=lire_config('partenaires_objets',array());
+	$objets_partenaires=isset($config['objets'])?$config['objets']:array();
+	
 
 
 	// partenaires sur les articles
-	if (!$e['edition'] AND in_array($e['type'], array('article'))) {
+	if (!$e['edition'] AND in_array($e['type'], $objets_partenaires)) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'partenaires',
 			'objet' => $e['type'],
@@ -50,6 +53,25 @@ function partenaires_objets_affiche_milieu($flux) {
 			$flux['data'] .= $texte;
 	}
 
+	return $flux;
+}
+
+function partenaires_objets_formulaire_traiter($flux){
+	// si creation d'un nouvel article lui attribuer la licence par defaut de la config
+	if ($flux['args']['form'] == 'editer_partenaire' AND $flux['args']['args'][0] == 'oui') {
+		// Un lien a prendre en compte ?
+		if ($associer_objet=_request('associer_objet') AND $id_partenaire = $flux['data']['id_partenaire']) {
+			list($objet, $id_objet) = explode('|', $associer_objet);	
+			if ($objet AND $id_objet AND autoriser('modifier', $objet, $id_objet)) {
+				include_spip('action/editer_liens');
+				objet_associer(array('partenaire' => $id_partenaire), array($objet => $id_objet));
+				if ($redirect = _request('redirect')) {
+					$flux['data']['redirect'] = parametre_url ($redirect, "id_lien_ajoute", $id_partenaire, '&');
+				}
+			}
+		}
+	
+	}
 	return $flux;
 }
 
