@@ -32,12 +32,10 @@ function partenaires_objets_affiche_milieu($flux) {
 	include_spip('inc/config');
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
+	
+	// partenaires sur les objets sélectionnées
 	$config=lire_config('partenaires_objets',array());
 	$objets_partenaires=isset($config['objets'])?$config['objets']:array();
-	
-
-
-	// partenaires sur les articles
 	if (!$e['edition'] AND in_array($e['type'], $objets_partenaires)) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'partenaires',
