@@ -1,6 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
-	multi nom,1,
-	date,-1, 
+	nom,1,
 	id_partenaire,1
 }})
 ]
@@ -18,7 +17,7 @@ a mis a jour la valeur avec la page reelle]
 	<thead>
 		#SET{p,''}
 		<BOUCLE_lettre(PARTENAIRES){tout}{id_partenaire IN #GET{selection}}{where?}{statut?}
-			{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_partenaire==#GET{afficher_lettres}|?{'.*','A'}}>[
+			{tri #ENV{par,nom},#GET{defaut_tri}}{id_partenaire==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#NOM**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
 		#SELF|parametre_url{debutparl,@#ID_PARTENAIRE}|ancre_url{paginationparl}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
@@ -39,7 +38,7 @@ a mis a jour la valeur avec la page reelle]
 	</thead>
 	<tbody>
 	<BOUCLE_liste_partenaires(PARTENAIRES){id_partenaire IN #GET{selection}}{statut?}
-		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} parl}>
+		{tri #ENV{par,nom},#GET{defaut_tri}}{pagination #ENV{nb,10} parl}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_PARTENAIRE|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class='statut'>[(#STATUT|puce_statut{partenaire})]</td> 
 			<td class='nom'>[(#LOGO_PARTENAIRE|image_reduire{20,20})]<a href="[(#ID_PARTENAIRE|generer_url_entite{partenaire})]">#NOM</a></td>

@@ -39,3 +39,4 @@ svn-commit*.tmp
 /.settings/
 /.buildpath
 /.project
+/svn.revision
